@@ -70,6 +70,18 @@ export type BlacklistAddRequest = {
   Adi: string; // name
   Soy: string; // surname
   Aciklama: string; // description
+  Kara: string; // required by backend
+  Tcno?: string | null; // TC number
+  Kimlik_no?: string | null; // ID number
+  Dogum_tarihi?: string | null; // birth date
+  Sistem_tarihi?: string | null; // system date
+  Sistem_grubu?: string | null; // system group
+  Otel_kodu?: string | null; // hotel code (backend expects string)
+  Ulke_xml?: string | null; // country xml
+  Kulanici?: string | null; // user
+  Acenta?: string | null; // agency
+  "Xml Kodu"?: string | null; // XML code
+  "ULke Adı"?: string | null; // country name
 };
 
 // Generic API response wrapper

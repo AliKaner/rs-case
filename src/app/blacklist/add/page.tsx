@@ -46,6 +46,18 @@ export default function BlacklistAddPage() {
         Adi: existingData.Adi ?? "",
         Soy: existingData.Soy ?? "",
         Aciklama: existingData.Aciklama ?? "",
+        Kara: existingData.Kara ?? "",
+        Tcno: existingData.Tcno ?? null,
+        Kimlik_no: existingData.Kimlik_no ?? null,
+        Dogum_tarihi: existingData.Dogum_tarihi ?? null,
+        Sistem_tarihi: existingData.Sistem_tarihi ?? null,
+        Sistem_grubu: existingData.Sistem_grubu ?? null,
+        Otel_kodu: existingData.Otel_kodu ?? null,
+        Ulke_xml: existingData.Ulke_xml ?? null,
+        Kulanici: existingData.Kulanici ?? null,
+        Acenta: existingData.Acenta ?? null,
+        "Xml Kodu": existingData["Xml Kodu"] ?? null,
+        "ULke Adı": existingData["ULke Adı"] ?? null,
       };
     }
     return BlacklistInitialValues;
@@ -57,11 +69,12 @@ export default function BlacklistAddPage() {
       ...values,
     };
 
-    mutation.mutate(requestData, {
-      onSuccess: () => {
-        router.push(ROUTES.BLACK_LIST);
-      },
-    });
+    try {
+      await mutation.mutateAsync(requestData);
+      router.push(ROUTES.BLACK_LIST);
+    } catch (error) {
+      // Error is handled by mutation onError
+    }
   };
 
   if (isEditMode && isLoading) {
