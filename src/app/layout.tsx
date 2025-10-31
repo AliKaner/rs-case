@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     description: "RS Case uygulaması",
     images: [
       {
-        url: "https://rmosweb.com/wp-content/uploads/2024/10/logo-9-kopya.png",
+        url: "/android-chrome-512x512.webp",
         width: 512,
         height: 512,
         alt: "RS Case",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RS Case",
     description: "RS Case uygulaması",
-    images: ["https://rmosweb.com/wp-content/uploads/2024/10/logo-9-kopya.png"],
+    images: ["/android-chrome-512x512.webp"],
   },
   icons: {
     icon: [
