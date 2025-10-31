@@ -129,6 +129,9 @@ Ayrıca component yapısı da kendi Medium yazımda açıkladığım yapıyı ta
 <img width="1352" height="595" alt="image" src="https://github.com/user-attachments/assets/683f555a-c6f4-425c-ae91-73e9068d7678" />
 <img width="1153" height="847" alt="image" src="https://github.com/user-attachments/assets/b487e48f-17fd-4386-8716-b439df5d32d9" />
 <img width="340" height="657" alt="image" src="https://github.com/user-attachments/assets/59d31c32-a377-4d0c-b4bc-4184f1bc374f" />
+<img width="293" height="166" alt="image" src="https://github.com/user-attachments/assets/2ad3cf86-9b36-40b0-bf09-1b7aae06f68d" />
+<img width="257" height="312" alt="image" src="https://github.com/user-attachments/assets/875633fb-8e85-4092-b7e3-e179eeafb53d" />
+
 
 
 
