@@ -41,12 +41,7 @@ export const metadata: Metadata = {
         width: 512,
         height: 512,
         alt: "RS Case",
-      },
-      {
-        url: "https://rmosweb.com/wp-content/uploads/2024/10/logo-9-kopya.png",
-        width: 192,
-        height: 192,
-        alt: "RS Case",
+        type: "image/webp",
       },
     ],
   },
