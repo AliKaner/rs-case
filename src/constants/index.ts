@@ -1,4 +1,4 @@
-export const TOAST_DURATION = 3000;
+export const TOAST_DURATION = 11000;
 export const COOKIE_EXPIRATION = 7;
 
 export const ROUTES = {

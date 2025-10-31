@@ -18,8 +18,10 @@ export const LoginForm = () => {
     validationSchema: loginSchema,
     validateOnChange: true,
     validateOnBlur: true,
-    onSubmit: (values) => {
+    onSubmit: (values, { setSubmitting }) => {
       login(values);
+      // Ensure buttons re-enable regardless of request outcome
+      setSubmitting(false);
     },
   });
 

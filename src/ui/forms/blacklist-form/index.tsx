@@ -411,7 +411,7 @@ export const BlacklistForm = ({
         <div className="flex flex-row justify-between gap-2 pt-4">
           <Button
             type="submit"
-            className="flex-1"
+            className="flex-1 cursor-pointer"
             disabled={formik.isSubmitting || isSubmitting}
           >
             {isSubmitting ? (
@@ -428,17 +428,17 @@ export const BlacklistForm = ({
           {!isEditMode && (
             <Button
               type="button"
-              className="w-1/4 bg-blue-500 text-white"
+              className="w-1/4 bg-blue-500 text-white cursor-pointer"
               disabled={formik.isSubmitting || isSubmitting}
               onClick={() => {
                 formik.setValues({
-                  Id: 0,
-                  Adi: "",
-                  Soy: "",
-                  Aciklama: "",
+                  Id: 1,
+                  Adi: "Ali",
+                  Soy: "Kaner",
+                  Aciklama: "Test amaçlı kara liste kaydı.",
                   Kara: "Kara",
-                  Tcno: "",
-                  Kimlik_no: "",
+                  Tcno: "10000000146",
+                  Kimlik_no: "A123456789",
                   Dogum_tarihi: "1995-05-20",
                   Sistem_tarihi: "2025-10-31",
                   Sistem_grubu: "Rezervasyon Kontrol",

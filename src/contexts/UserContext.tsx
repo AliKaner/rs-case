@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import { COOKIE_EXPIRATION, TOAST_MESSAGES } from "@/constants";
@@ -35,6 +36,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState(true);
   const { showToast } = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     const token = Cookies.get("auth-token");
@@ -49,10 +51,8 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       setUsername(variables.userName);
       setIsAuthenticated(true);
       showToast(TOAST_MESSAGES.SUCCESS.LOGIN, "success");
-      // Redirect to forecast page after successful login
-      if (typeof window !== "undefined") {
-        window.location.href = "/forecast";
-      }
+      // Client-side navigation to preserve app state/providers
+      router.push("/forecast");
     },
     onError: (error) => {
       showToast(error?.message || TOAST_MESSAGES.ERROR.LOGIN, "error");
