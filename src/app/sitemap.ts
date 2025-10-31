@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["/", "/forecast", "/blacklist"].map((path) => ({
     url: `${siteUrl}${path}`,
     lastModified: new Date(),
-    changeFrequency: "daily",
+    changeFrequency: "daily" as const,
     priority: path === "/" ? 1 : 0.7,
   }));
 
