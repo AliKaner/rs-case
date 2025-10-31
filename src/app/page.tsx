@@ -12,14 +12,15 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center min-h-[60vh] gap-8 p-4">
       <div className="text-center space-y-4 max-w-2xl">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
-         Welcome to RS Case
+          Welcome to RS Case
         </h1>
         <p className="text-lg text-gray-600">
-          Welcome to RS Case application. You can select your location and continue your operations.
+          Welcome to RS Case application. You can select your location and
+          continue your operations.
         </p>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-md">
+      <div className="flex flex-col sm:flex-row gap-4 mt-6 w-full max-w-2xl h-24">
         <Button
           onClick={() => router.push(ROUTES.BLACK_LIST)}
           size="lg"
