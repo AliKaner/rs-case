@@ -7,6 +7,7 @@ import { useUser } from "@/contexts/UserContext";
 import Logo from "@/ui/common/logo";
 import { Button } from "@/ui/components/button";
 import { useRouter } from "next/navigation";
+import { ROUTES } from "@/constants";
 
 // Props
 
@@ -33,8 +34,23 @@ export const HeaderContent = () => {
 
       <div className="flex items-center gap-3">
         {mounted && !isLoading && isAuthenticated && (
-          <Button variant="outline" size="sm" onClick={handleLogout}>
-            Çıkış Yap
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleLogout}
+            className="cursor-pointer"
+          >
+            Log Out
+          </Button>
+        )}
+        {mounted && !isLoading && !isAuthenticated && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => router.push(ROUTES.LOGIN)}
+            className="cursor-pointer"
+          >
+            Login
           </Button>
         )}
       </div>

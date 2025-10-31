@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { useBlacklistGetir } from "@/api/blacklist";
 import { BlacklistRequestInitialValues } from "@/api/types";
 import { formatDateYMDToDMY } from "@/lib/utils";
@@ -23,13 +23,42 @@ import {
 } from "@/ui/components/select";
 import { ROUTES } from "@/constants";
 import { Button } from "@/ui/components/button";
+import { useToast } from "@/contexts/ToastContext";
+import { TOAST_MESSAGES } from "@/constants";
 
 type AnyRecord = Record<string, unknown>;
 
 export default function BlacklistPage() {
   const router = useRouter();
-  const { data, isLoading, isError, error, refetch, isFetching } =
-    useBlacklistGetir(BlacklistRequestInitialValues);
+  const {
+    data,
+    isLoading: isDataLoading,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useBlacklistGetir(BlacklistRequestInitialValues);
+
+  const { showToast } = useToast();
+  const hasShownErrorToastRef = useRef(false);
+
+  useEffect(() => {
+    // Show toast only for Bad Request (400). For other errors, suppress toast.
+    if (isError && !hasShownErrorToastRef.current) {
+      const status = (error as any)?.response?.status;
+      if (status === 400) {
+        const message =
+          (error as any)?.response?.data?.message ||
+          (error as any)?.message ||
+          TOAST_MESSAGES.ERROR.GENERIC;
+        showToast(message, "error");
+        hasShownErrorToastRef.current = true;
+      }
+    }
+    if (!isError) {
+      hasShownErrorToastRef.current = false;
+    }
+  }, [isError, error, showToast]);
 
   const rows: AnyRecord[] = useMemo(() => {
     if (!data) return [];
@@ -53,7 +82,7 @@ export default function BlacklistPage() {
     return rows.slice(start, start + pageSize);
   }, [rows, currentPage, pageSize]);
 
-  if (isLoading) {
+  if (isDataLoading) {
     return (
       <div className="flex items-center justify-center p-8">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -99,10 +128,11 @@ export default function BlacklistPage() {
         </div>
       </div>
 
-      {isError ? (
-        <div className="text-red-600">Error: {(error as Error)?.message}</div>
-      ) : rows.length === 0 ? (
-        <div>No records found.</div>
+      {rows.length === 0 ? (
+        <div className="text-sm text-muted-foreground h-[520px] flex items-center justify-center flex-col gap-2 border rounded-md p-4">
+          <AlertCircle className="h-8 w-8" />
+          <span className="text-sm text-muted-foreground">No data</span>
+        </div>
       ) : (
         <div className="blacklist-table-container w-full max-w-[100%] overflow-x-auto">
           <Table>
@@ -128,6 +158,7 @@ export default function BlacklistPage() {
                     <Button
                       variant="outline"
                       size="sm"
+                      className="cursor-pointer"
                       onClick={() => {
                         const id = row.Id || row.id || row.ID;
                         if (id) {
@@ -135,7 +166,7 @@ export default function BlacklistPage() {
                         }
                       }}
                     >
-                      Düzenle
+                      Edit
                     </Button>
                   </TableCell>
                 </TableRow>

@@ -24,7 +24,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { Loader2 } from "lucide-react";
+import { AlertCircle, Loader2 } from "lucide-react";
 import { StpRmforKlasik2ResponseItem } from "@/api/types";
 
 const ForecastPage = () => {
@@ -34,7 +34,11 @@ const ForecastPage = () => {
     "Oda"
   );
   //Hooks
-  const { data, isLoading, error } = useQuery({
+  const {
+    data,
+    isLoading: isForecastLoading,
+    error,
+  } = useQuery({
     queryKey: ["forecast"],
     queryFn: () => forecastApi.stpRmforKlasik2(),
   });
@@ -53,7 +57,12 @@ const ForecastPage = () => {
 
   const Chart = () => {
     if (chartData.length === 0) {
-      return <div className="text-sm text-muted-foreground">Veri yok</div>;
+      return (
+        <div className="text-sm text-muted-foreground h-[520px] flex items-center justify-center flex-col gap-2 border rounded-md p-4">
+          <AlertCircle className="h-8 w-8" />
+          <span className="text-sm text-muted-foreground">Veri yok</span>
+        </div>
+      );
     }
     return (
       <div className="w-full" style={{ height: 500 }}>
@@ -80,7 +89,7 @@ const ForecastPage = () => {
   // Render
   return (
     <div className="w-full max-w-[1200px] mx-auto p-4 space-y-4">
-      {!isLoading && (
+      {!isForecastLoading && (
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <h1 className="text-xl font-semibold">Forecast</h1>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
@@ -107,12 +116,15 @@ const ForecastPage = () => {
         </div>
       )}
 
-      {isLoading ? (
+      {isForecastLoading ? (
         <div className="flex items-center justify-center p-8">
           <Loader2 className="h-8 w-8 animate-spin" />
         </div>
       ) : (rows as StpRmforKlasik2ResponseItem[]).length === 0 ? (
-        <div className="text-sm text-muted-foreground">Veri yok</div>
+        <div className="text-sm text-muted-foreground h-[520px] flex items-center justify-center  flex-col gap-2 border rounded-md p-4">
+          <AlertCircle className="h-8 w-8" />
+          <span className="text-sm text-muted-foreground">Veri yok</span>
+        </div>
       ) : displayType === "chart" ? (
         <div className="rounded-md border bg-background h-[520px] flex items-center justify-center pr-4">
           <Chart />
