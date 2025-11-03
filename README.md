@@ -1,4 +1,4 @@
-#SC Management Dashboard
+# SC Management Dashboard
 
 Bu proje, kullanıcıların listelenmesi, filtrelenmesi ve düzenlenmesini sağlayan bir **Next.js 14+ (App Router)** tabanlı yönetim panelidir.  
 Case projesi kapsamında modern frontend prensipleri (React Query, Debounce, Responsive tasarım, State management) uygulanmıştır.
