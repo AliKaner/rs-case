@@ -20,7 +20,6 @@ export const LoginForm = () => {
     validateOnBlur: true,
     onSubmit: (values, { setSubmitting }) => {
       login(values);
-      // Ensure buttons re-enable regardless of request outcome
       setSubmitting(false);
     },
   });
